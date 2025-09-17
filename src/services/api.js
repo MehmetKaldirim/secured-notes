@@ -2,7 +2,6 @@ import axios from "axios";
 
 console.log("API URL:", process.env.REACT_APP_API_URL);
 
-// Create an Axios instance
 const api = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/api`,
   headers: {
@@ -12,12 +11,16 @@ const api = axios.create({
   withCredentials: true,
 });
 
-// Add a request interceptor to include JWT and CSRF tokens
 api.interceptors.request.use(
   async (config) => {
     const token = localStorage.getItem("JWT_TOKEN");
+    console.log("JWT_TOKEN from localStorage:", token);
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      console.log("Authorization header set:", config.headers.Authorization);
+    } else {
+      console.warn("No JWT token found in localStorage!");
     }
 
     let csrfToken = localStorage.getItem("CSRF_TOKEN");
@@ -36,8 +39,9 @@ api.interceptors.request.use(
 
     if (csrfToken) {
       config.headers["X-XSRF-TOKEN"] = csrfToken;
+      console.log("CSRF token set:", csrfToken);
     }
-    console.log("X-XSRF-TOKEN " + csrfToken);
+
     return config;
   },
   (error) => {

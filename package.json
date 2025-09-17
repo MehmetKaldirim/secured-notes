@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.0",
     "dompurify": "^3.1.4",
+    "express": "^5.1.0",
     "framer-motion": "^11.2.10",
     "html-to-text": "^9.0.5",
     "js-cookie": "^3.0.5",
@@ -31,7 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
