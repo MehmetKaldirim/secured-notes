@@ -4,8 +4,8 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "build")));
 
-// Tüm istekleri index.html'e yönlendir (Express 5+ uyumlu)
-app.get("*", (req, res) => {
+// Express 5 uyumlu regex
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
